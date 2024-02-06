@@ -1,0 +1,52 @@
+<launch>
+    <!--  arg='rtabmap_args:="delete_db_on_start"     
+left_image_topic:=/camera/infra1/image_rect_raw    
+right_image_topic:=/camera/infra2/image_rect_raw    
+left_camera_info_topic:=/camera/infra1/camera_info    
+right_camera_info_topic:=/camera/infra2/camera_info   
+stereo:=true 
+rviz:=true
+'/ -->
+    
+    <include file="$(find msckf_vio)/launch/msckf_vio_realsense.launch">
+        <arg name="fixed_frame_id" value="map"/>
+    </include>
+         <arg name="pi/2" value="1.5707963267948966" />
+   <arg name="optical_rotate" value="0 0 0 0 -$(arg pi/2) $(arg pi/2)" />
+   <node pkg="tf" type="static_transform_publisher" name="camera_base_link"
+        args="$(arg optical_rotate) odom camera_link 100" /> 
+
+     <include file="$(find rtabmap_launch)/launch/rtabmap.launch" >
+        <arg name="rtabmap_args"        value="--delete_db_on_start"/>
+        <arg name="left_image_topic"    value="/camera/infra1/image_rect_raw"/>
+        <arg name="right_image_topic"    value="/camera/infra2/image_rect_raw"/>
+        <arg name="left_camera_info_topic"    value="/camera/infra1/camera_info"/>
+        <arg name="right_camera_info_topic"    value="/camera/infra2/camera_info"/>
+        <arg name="stereo"              value="true"/>
+        <arg name="rviz"                value="true"/>
+        <arg name="rtabmap_viz"         value="false"/>
+        <arg name="use_sim_time"        value="true" />
+        
+        <arg name="frame_id" value="camera_link"/>
+        <arg name="odom_topic" value="/gg/vio/odom"/>
+        
+        <arg name="approx_sync" value="false"/> 
+        <arg name="publish_tf_odom" value="false"/> 
+        <arg name="visual_odometry" value="false"/>
+
+        <arg name="queue_size"      value="30"/>
+        <!-- <arg name="odom_topic" value="/gg/vio/odom"/> -->
+        <!-- <arg name="subscribe_odom_info" value="false"/> -->
+        
+    </include>
+    <!-- <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0 0 0 0 1 odom camera_link 1" /> -->
+</launch>
+
+<!-- 
+    covariance: [   0.0041250135813455276, -0.0002763431139266117, -0.00027734485983064983, 0.0, 0.0, 0.0, 
+                    -0.0002763431139266117, 0.004390341424529757, 0.000723437082287713, 0.0, 0.0, 0.0, 
+                    -0.00027734485983064983, 0.000723437082287713, 0.0015922794255576115, 0.0, 0.0, 0.0, 
+                    0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 
+                    0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 
+                    0.0, 0.0, 0.0, 0.0, 0.0, 1.0] 
+-->

@@ -1,0 +1,6 @@
+<launch>
+
+    <include file="$(find msckf_vio)/launch/msckf_vio_realsense.launch"/>
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find msckf_vio)/rviz/rviz_realsense_config.rviz" />
+
+</launch>
