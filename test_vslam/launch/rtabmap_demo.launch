@@ -24,8 +24,8 @@ rviz:=true
         <arg name="right_camera_info_topic"    value="/camera/infra2/camera_info"/>
         <arg name="stereo"              value="true"/>
         <arg name="rviz"                value="true"/>
-        <arg name="rtabmap_viz"         value="false"/>
-        <arg name="use_sim_time"        value="true" />
+        <arg name="rtabmap_viz"         value="false"/> <!-- false for now due to vm issues -->
+        <arg name="use_sim_time"        value="true" /> <!-- for rosbag play -->
         
         <arg name="frame_id" value="camera_link"/>
         <arg name="odom_topic" value="/gg/vio/odom"/>
@@ -39,7 +39,6 @@ rviz:=true
         <!-- <arg name="subscribe_odom_info" value="false"/> -->
         
     </include>
-    <!-- <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0 0 0 0 1 odom camera_link 1" /> -->
 </launch>
 
 <!-- 
