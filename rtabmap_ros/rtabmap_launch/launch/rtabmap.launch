@@ -27,7 +27,7 @@
 
   <!-- Localization-only mode -->
   <arg name="localization"            default="false"/>
-  <arg name="initial_pose"            default=""/>             <!-- Format: "x y z roll pitch yaw" or "x y z qx qy qz qw". Default: see "RGBD/StartAtOrigin" doc -->
+  <arg name="initial_pose"            default="0 0 0 0 0 0"/>             <!-- Format: "x y z roll pitch yaw" or "x y z qx qy qz qw". Default: see "RGBD/StartAtOrigin" doc -->
   <arg name="loc_thr"                 default="0.0"/>          <!-- In localization mode, setting this threshold will make rtabmap publishing diagnostics about if the robot is localized (under that error threshold). -->
 
   <!-- sim time for convenience, if playing a rosbag -->

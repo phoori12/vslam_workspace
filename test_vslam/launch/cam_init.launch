@@ -1,4 +1,7 @@
 <launch>
+
+
+  
   <arg name="serial_no"           default=""/>
   <arg name="usb_port_id"         default=""/>
   <arg name="device_type"         default=""/>
@@ -155,6 +158,10 @@
 
   <arg name="node_start_delay" default="10.0" />  
   <node name="dynamic_reconfigure_load" pkg="dynamic_reconfigure" type="dynparam" args="set /camera/stereo_module 'emitter_enabled' 0" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@'"/> 
+  <arg name="record" default="false" />
+  <group if="$(arg record)">
+          <node type="rviz" name="rviz" pkg="rviz" args="-d $(find test_vslam)/rviz/record.rviz" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@'" />
+  </group>
   <!--<arg name="node_start_delay" default="20.0" />  
   <node name="dynamic_reconfigure_load" pkg="dynamic_reconfigure" type="dynparam" args="load /camera/stereo_module $(find test_vslam)/configs/emitter_off.yaml" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' "/> -->
 </launch>

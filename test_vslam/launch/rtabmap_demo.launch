@@ -25,7 +25,7 @@ rviz:=true
 
     <include file="$(find rtabmap_launch)/launch/rtabmap.launch" >
         <arg name="localization"    value="$(arg localization)" />
-
+        
         <arg if="$(arg localization)"     name="rtabmap_args"   value="" />
         <arg unless="$(arg localization)" name="rtabmap_args"   value="--delete_db_on_start"/>
 
